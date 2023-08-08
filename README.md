@@ -1,11 +1,11 @@
 # ds5100_montecarlo
-#Meta data
+# Meta data
 DS5100 Final Project
 Final project for DS5100 as part of UVA data science masters degree
 Project creates three classes and places them in montecarlo module that creates and analyzes a dice game.
 Project name is Monte Carlo simulator
 
-#Synopsis
+# Synopsis
 
 Sample Code:
 
@@ -163,7 +163,7 @@ test_object5.combo_count()
 25	(c, d, d)	1
 26	(c, d, e)	1
 
-#API description
+# API description
 
 Die class:
 
