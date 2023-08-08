@@ -1,8 +1,11 @@
 # ds5100_montecarlo
+#Meta data
 DS5100 Final Project
 Final project for DS5100 as part of UVA data science masters degree
 Project creates three classes and places them in montecarlo module that creates and analyzes a dice game.
 Project name is Monte Carlo simulator
+
+#Synopsis
 
 Sample Code:
 
@@ -159,3 +162,155 @@ test_object5.combo_count()
 24	(a, b, e)	1
 25	(c, d, d)	1
 26	(c, d, e)	1
+
+#API description
+
+Die class:
+
+	The Die class defines the dice that will be used in future games. A die has sides, or “faces”, and weights, 
+ 	and can be rolled to select aface.
+
+	Normally, dice and coins are “fair,” meaning that the each side has an equal weight. An unfair die is one where the weights are unequal.
+
+    	Each side contains a unique symbol. Symbols may be all alphabetic or all numeric.
+
+    	Weight defaults to 1 for each face but can be changed after the object is created.
+
+    	The weights are just numbers, not a normalized probability distribution.
+
+    	The die has one behavior, which is to be rolled one or more times.
+
+    Init method: 
+    
+        Takes a NumPy array of faces as an argument. Throws a TypeError if not a NumPy array.
+
+        The arrays data type (dtype) may be strings or numbers.
+
+        The arrays values must be distinct. Tests to see if the values are distinct and raises a ValueError if not.
+
+        Internally initializes the weights to for each face.
+
+        Saves both faces and weights in a private data frame with faces in the index.
+
+    Weight change method:
+
+	A method to change the weight of a single side.
+        
+        Takes two arguments: the face value to be changed and the new weight.
+
+        Checks to see if the face passed is valid value, i.e. if it is in the die array. If not, raises an IndexError.
+
+        Checks to see if the weight is a valid type, i.e. if it is numeric (integer or float) or castable as numeric. If not, raises a TypeError.
+
+    Roll die method:
+   
+   	    A method to roll the die one or more times.
+
+            Takes a parameter of how many times the die is to be rolled; defaults to 1.
+
+            This is essentially a random sample with replacement, from the private die data frame, that applies the weights.
+
+            Returns a Python list of outcomes.
+
+            Does not store internally these results.
+
+     Current state method:
+     
+     	    A method to show the dies current state.
+        
+            Returns a copy of the private die data frame.
+
+Game class:
+
+    A game consists of rolling of one or more similar dice (Die objects) one or more times.
+
+    By similar dice, we mean that each die in a given game has the same number of sides
+    
+     and associated faces, but each die object may have its own weights.
+
+    Each game is initialized with a Python list that contains one or more dice.
+
+    Game objects have a behavior to play a game, i.e. to roll all of the dice a given number of times.
+
+    Game objects only keep the results of their most recent play.
+
+       Init method:
+
+    	   Takes a single parameter, a list of already instantiated similar dice.
+
+       Play method:
+
+    	   A play method.
+
+    	   Takes an integer parameter to specify how many times the dice should be rolled.
+
+           Saves the result of the play to a private data frame.
+
+           The data frame should be in wide format, i.e. have the roll number as a named index, 
+    
+           columns for each die number (using its list index as the column name), and the face rolled in that instance in each cell.
+
+       Results method:
+
+    	   A method to show the user the results of the most recent play.
+
+    	   This method just returns a copy of the private play data frame to the user.
+
+    	   Takes a parameter to return the data frame in narrow or wide form which defaults to wide form.
+
+    	   The narrow form will have a MultiIndex, comprising the roll number and the die number (in that order), 
+    
+    	   and a single column with the outcomes (i.e. the face rolled).
+
+    	   This method should raise a ValueError if the user passes an invalid option for narrow or wide.
+
+Analyzer method:
+
+    General Definition. An Analyzer object takes the results of a single game 
+  
+    and computes various descriptive statistical properties about it.
+
+        Init method:
+
+           Takes a game object as its input parameter. Throw a ValueError if the passed value is not a Game object.
+
+        Jackpot method:
+
+           A jackpot is a result in which all faces are the same, e.g. all ones for a six-sided die.
+
+           Computes how many times the game resulted in a jackpot, if an individual roll resulted in a jackpot and 
+      
+           the jackpots per roll at that stage of the game.
+
+           Returns an integer for the number of jackpots.
+
+        Face counts per roll method:
+
+           Computes how many times a given face is rolled in each event.
+        
+           Returns a data frame of results.
+
+           The data frame has an index of the roll number, face values as columns, 
+      
+           and count values in the cells (i.e. it is in wide format).
+
+       Combo counts method:
+
+          Computes the distinct combinations of faces rolled, along with their counts.
+
+          Combinations are order-independent and may contain repetitions.
+
+          Returns a data frame of results.
+
+          The data frame should have an MultiIndex of distinct combinations and a column for the associated counts.
+
+       Permutation counts method:
+
+          Computes the distinct permutations of faces rolled, along with their counts.
+
+          Permutations are order-dependent and may contain repetitions.
+
+          Returns a data frame of results.
+
+          The data frame should have an MultiIndex of distinct permutations and a column for the associated counts.
+    
