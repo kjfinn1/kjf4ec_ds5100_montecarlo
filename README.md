@@ -210,13 +210,13 @@ Die class:
 
             This is essentially a random sample with replacement, from the private die data frame, that applies the weights.
 
-            Returns a Python list of outcomes.
+            Returns a Python data frame of outcomes, listing the dice, the roll, and the face value.
 
             Does not store internally these results.
 
      Current state method:
      
-     	    A method to show the dies current state.
+     	    A method to show the dies current state i.e. what the weight is for each face of the die.
         
             Returns a copy of the private die data frame.
 
@@ -264,6 +264,8 @@ Game class:
 
     	   This method should raise a ValueError if the user passes an invalid option for narrow or wide.
 
+ 	   This mothod returns the die, the roll, and the face value in a data frame.
+
 Analyzer method:
 
     General Definition. An Analyzer object takes the results of a single game 
@@ -282,7 +284,9 @@ Analyzer method:
       
            the jackpots per roll at that stage of the game.
 
-           Returns an integer for the number of jackpots.
+           Returns an integer for the number of jackpots and a data frame that asserts True/False (if it was a jackpot) and the ratio of jackpots
+	   
+	   per roll up until that point in the game.
 
         Face counts per roll method:
 
@@ -294,6 +298,8 @@ Analyzer method:
       
            and count values in the cells (i.e. it is in wide format).
 
+           Returns a data frame with the number of times each face appeared across all the die on a given roll.
+
        Combo counts method:
 
           Computes the distinct combinations of faces rolled, along with their counts.
@@ -304,13 +310,19 @@ Analyzer method:
 
           The data frame should have an MultiIndex of distinct combinations and a column for the associated counts.
 
+          Returns all the different combinations of faces that came up on a given roll over the course of the game regardless of order (i.e. (a, b)
+	  
+	  = (b, a) and the number of times they came up in a data frame.
+
        Permutation counts method:
 
           Computes the distinct permutations of faces rolled, along with their counts.
 
           Permutations are order-dependent and may contain repetitions.
 
-          Returns a data frame of results.
+          Returns all the different permutations of faces that came up on a given roll over the course of the game with respect to order (i.e. (a, b)
+	  
+	  != (b, a) and the number of times they came up in a data frame.
 
           The data frame should have an MultiIndex of distinct permutations and a column for the associated counts.
     
