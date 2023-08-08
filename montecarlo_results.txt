@@ -1,2 +1,7 @@
-Total Jackpots 4
-Total Jackpots 4
+(base) kevinfinn@Kevins-MacBook-Pro montecarlo % python  montecarlo_test.py > montecarlo_results.txt 
+............
+----------------------------------------------------------------------
+Ran 12 tests in 0.049s
+
+OK
+
